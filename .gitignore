@@ -1,5 +1,6 @@
 .env
 .vscode
+.idea
 .wttd
 *.sqlite3
 *pyc
