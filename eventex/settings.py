@@ -14,9 +14,9 @@ import os
 
 from decouple import Csv, config
 from dj_database_url import parse as dburl
-from django.conf.global_settings import (DEFAULT_FILE_STORAGE,
-                                         STATICFILES_STORAGE)
-import boto3
+# from django.conf.global_settings import (DEFAULT_FILE_STORAGE,
+#                                          STATICFILES_STORAGE)
+# import boto3
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'eventex.core',
     'eventex.subscriptions',
-    'storages',
+    # 'storages',
 ]
 
 MIDDLEWARE = [
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -126,27 +126,37 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-USE_S3 = config('USE_S3', default=False, cast=bool)
-
-if USE_S3:
-    # aws settings
-    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    # s3 static settings
-    AWS_LOCATION = 'static'
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'eventex/core/static'),]
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# USE_S3 = config('USE_S3', default=False, cast=bool)
+#
+# if USE_S3:
+#     # aws settings
+#     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+#     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+#     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+#     AWS_DEFAULT_ACL = 'public-read'
+#     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+#     # s3 static settings
+#     AWS_LOCATION = 'static'
+#     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'eventex/core/static'),]
+#     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+#     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# else:
+#     STATIC_URL = '/static/'
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'eventex/core/static'),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'eventex/core/static'),)
+
+
+# Email configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
