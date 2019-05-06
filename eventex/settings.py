@@ -14,15 +14,9 @@ import os
 
 from decouple import Csv, config
 from dj_database_url import parse as dburl
-# from django.conf.global_settings import (DEFAULT_FILE_STORAGE,
-#                                          STATICFILES_STORAGE)
-# import boto3
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -47,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'eventex.core',
     'eventex.subscriptions',
-    # 'storages',
 ]
 
 MIDDLEWARE = [
@@ -128,9 +121,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 # USE_S3 = config('USE_S3', default=False, cast=bool)
 #
