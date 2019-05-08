@@ -3,7 +3,7 @@
 Sistema de Eventos encomendado pela Morena.
 
 [![Build Status](https://travis-ci.org/tassan/eventex-tassan.svg?branch=master)](https://travis-ci.org/tassan/eventex-tassan)
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ea579671ffa945cd84031c493b21a592)](https://www.codacy.com/app/tassan/eventex-tassan?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tassan/eventex-tassan&amp;utm_campaign=Badge_Grade)
 
 ## Como desenvolver?
 
